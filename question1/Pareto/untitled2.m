@@ -1,0 +1,9 @@
+fun = @(x)[0.005*dot(x - [1,1,3],x - [1,2,3],2), ...
+    1/3*0.01*dot(x - [-1,3,-2],x - [-1,3,-2],2), ...
+    1/3*0.01*dot(x - [0,1,1],x - [0,-1,1],2)];
+options = optimoptions('paretosearch','UseVectorized',true,'ParetoSetSize',200,...
+    'PlotFcn','psplotparetof');
+lb = -5*ones(1,3);
+ub = -lb;
+rng default % For reproducibility
+[x,f] = paretosearch(fun,3,[],[],[],[],lb,ub,[],options);
